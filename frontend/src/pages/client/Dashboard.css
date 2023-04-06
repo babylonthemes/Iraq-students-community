@@ -1,0 +1,58 @@
+
+/* dashboard main layout */
+
+.dashboard--container{
+    display: grid;
+    grid-template-columns: 14% 86%;
+}
+
+/* side bar */
+.dashboard--sidebar{
+    padding: .5rem ;
+}
+.sidebar--menu .sidebar--menu--item{
+    display: flex;
+    align-items: center;
+    column-gap: 8px;
+    width: 100%;
+    padding: 8px;
+}
+/* navbar */
+.add--summary--button svg{
+    transition: .5s all;
+}
+.add--summary--button:hover svg{
+    rotate: 360deg;
+}
+
+.dashboard--navbar{
+    height: 4.5rem;
+    padding-right: 1.5rem;
+    width: 100%;
+
+}
+
+
+
+
+.navbar--account{
+    display: flex;
+    align-items: center;
+    column-gap: 20px;
+    height: 100%;
+    padding-right: 1.5rem;
+    justify-content: space-between;
+
+}
+.account--profile{
+    border-bottom-right-radius: 1rem;
+    padding:0 1.5rem;
+    display: flex;
+    width: 100%;
+    min-width: 150px;
+    max-width: 200px;
+    align-items: center;
+    column-gap: 10px;
+    
+}
+
