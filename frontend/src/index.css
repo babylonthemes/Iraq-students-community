@@ -49,3 +49,6 @@ code {
 .ltr{
   direction: ltr;
 }
+.transition-all {
+  transition: .5s !important;
+}
