@@ -10,7 +10,7 @@ class Fundation(models.Model):
         ("UNIVERSITY","University"),
         ("SCHOOL","School")
     )
-    type        = models.CharField(max_length=10,choices=TYPES)
+    type        = models.CharField(max_length=10,choices=TYPES,default="SCHOOL")
     admin       = models.ForeignKey(User,on_delete=models.SET_NULL,null=True)
     name        = models.CharField(max_length=150)
     date_funded = models.DateField()
