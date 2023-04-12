@@ -37,9 +37,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # Third-party applications 
+    'rest_framework',
     # Custom applications
-    # 'customaccount',
+    'customaccount.apps.CustomaccountConfig',
+    "fundation.apps.FundationConfig",
+    "subject.apps.SubjectConfig",
+    "summary.apps.SummaryConfig",
+    
 ]
+
+AUTH_USER_MODEL = 'customaccount.CustomAccount'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -70,6 +78,19 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'core.wsgi.application'
+
+# Rest framework (API)
+# https://www.django-rest-framework.org/
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
+        
+    ],
+    'PAGE_SIZE': 1
+}
 
 
 # Database
