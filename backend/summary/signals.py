@@ -51,7 +51,7 @@ def comment(sender,instance,created,**kwargs):
             caption=f" قام {instance.user.first_name +' ' + instance.user.last_name}   بأضافة تعليق جديد على الملخص  {instance.summary.title} ",
             eventRelated="COMMENT",
             eventMethod="C_ADD",
-            url=f"http://localhost:3000/summaries/subject={instance.subject.name}&summaryId={instance.id}&commentId={instance.id}"
+            url=f"http://localhost:3000/summaries/subject={instance.summary.subject.name}&summaryId={instance.id}&commentId={instance.id}"
         )
         
         
@@ -66,7 +66,7 @@ def comment(sender,instance,created,**kwargs):
             caption=f" قام {instance.user.first_name +' ' + instance.user.last_name} بتعديل تعليقه على الملخص {instance.summary.title} ",
             eventRelated="COMMENT",
             eventMethod="C_EDIT",
-            url=f"http://localhost:3000/summaries/subject={instance.subject.name}&summaryId={instance.summary.id}&commentId={instance.id}"
+            url=f"http://localhost:3000/summaries/subject={instance.summary.subject.name}&summaryId={instance.summary.id}&commentId={instance.id}"
         )
         event.save()
 
@@ -74,7 +74,7 @@ def comment(sender,instance,created,**kwargs):
 
 
 
-@receiver(post_save, sender=SummaryComment)
+@receiver(post_save, sender=CommentReply)
 def reply(sender,instance,created,**kwargs):
     if created:
         timeline = SummaryTimeline.objects.get_or_create(summary=instance.summary)[0]
@@ -82,10 +82,10 @@ def reply(sender,instance,created,**kwargs):
         event = TimelineEvent.objects.create(
             user=instance.user,
             timeline=timeline,
-            caption=f" قام {instance.user.first_name +' ' + instance.user.last_name}   بأضافة رد  جديد على التعليق  {instance.comment.text} ",
+            caption=f" قام ($)   بأضافة رد  جديد على التعليق  {instance.comment.text} ",
             eventRelated="REPLY",
             eventMethod="R_ADD",
-            url=f"http://localhost:3000/summaries/subject={instance.subject.name}&summaryId={instance.id}&commentId={instance.comment.id},&replyId={instance.id}"
+            url=f"http://localhost:3000/summaries/subject={instance.summary.subject.name}&summaryId={instance.id}&commentId={instance.comment.id},&replyId={instance.id}"
         )
         
         
@@ -97,10 +97,10 @@ def reply(sender,instance,created,**kwargs):
         event = TimelineEvent.objects.create(
             user=instance.user,
             timeline=timeline,
-            caption=f" قام {instance.user.first_name +' ' + instance.user.last_name} بتعديل رده  على التعليق {instance.comment.text} ",
+            caption=f" قام ($) بتعديل رده  على التعليق {instance.comment.text} ",
             eventRelated="REPLY",
             eventMethod="R_EDIT",
-            url=f"http://localhost:3000/summaries/subject={instance.subject.name}&summaryId={instance.id}&commentId={instance.comment.id},&replyId={instance.id}"
+            url=f"http://localhost:3000/summaries/subject={instance.summary.subject.name}&summaryId={instance.id}&commentId={instance.comment.id},&replyId={instance.id}"
         )
         event.save()
 
