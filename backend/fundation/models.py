@@ -19,8 +19,8 @@ class Fundation(models.Model):
     staff       = models.ManyToManyField(FundationStaffAccount,blank=True,related_name='staffFundation')
     
     
-    def __str__(self):
-        return self.name
+    def __str__(self) -> str:
+        return f"{self.username} ({self.name}) "
 
 
 
@@ -35,6 +35,8 @@ class FundationStage(models.Model):
     summary             = models.TextField(max_length=1000)
     admin               = models.ForeignKey(FundationStaffAccount,on_delete=models.SET_NULL,null=True)
 
+    def __str__(self) -> str:
+        return self.name
 
 class FundationDepartment(models.Model):
     fundation           = models.ForeignKey(Fundation,on_delete=models.CASCADE,related_name='fundationDepartments')
@@ -44,6 +46,8 @@ class FundationDepartment(models.Model):
     staffAdmins         = models.ManyToManyField(FundationStaffAccount)
     students            = models.ManyToManyField(StudentAccount)
     
+    def __str__(self) -> str:
+        return self.name
 
 
 class FundationEvent(models.Model):
@@ -58,3 +62,6 @@ class FundationEvent(models.Model):
     aotherDetails   = models.TextField(max_length=500)
     eventGroup      = models.ManyToManyField(FundationStaffGroup,blank=True)
 
+
+    def __str__(self) -> str:
+        return self.name
