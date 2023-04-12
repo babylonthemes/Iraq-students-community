@@ -7,8 +7,6 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import ErrorPage from './error-page';
-import StudentHome from './pages/client/student/StudentHome';
-import Home from './pages/client/student/pages/Home';
 
 const router2 = [
   {
@@ -24,14 +22,9 @@ const router2 = [
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <StudentHome />,
+    element:<div>Home  </div> ,
     errorElement:<ErrorPage />,
-    children:[
-      {
-        path:"/",
-        element:<Home />
-      }
-    ],
+
   },
 ]);
 
