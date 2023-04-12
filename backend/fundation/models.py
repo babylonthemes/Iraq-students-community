@@ -13,9 +13,14 @@ class Fundation(models.Model):
     type        = models.CharField(max_length=10,choices=TYPES,default="SCHOOL")
     admin       = models.ForeignKey(User,on_delete=models.SET_NULL,null=True)
     name        = models.CharField(max_length=150)
+    username    = models.CharField(max_length=40,unique=True,null=True)
     date_funded = models.DateField()
     students    = models.ManyToManyField(StudentAccount,blank=True,related_name='studentFundation')
     staff       = models.ManyToManyField(FundationStaffAccount,blank=True,related_name='staffFundation')
+    
+    
+    def __str__(self):
+        return self.name
 
 
 
