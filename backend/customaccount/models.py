@@ -4,7 +4,7 @@ from django.contrib.auth.models import PermissionsMixin,AbstractBaseUser
 from django.contrib.auth.hashers import make_password
 import datetime
 
-class Account(AbstractBaseUser,PermissionsMixin):
+class CustomAccount(AbstractBaseUser,PermissionsMixin):
     username            = models.CharField(max_length=50,unique=True,help_text=None)
     email               = models.EmailField(verbose_name=' الايميل  ',unique=True,blank=False,null=True,help_text=None)
     first_name          = models.CharField(max_length=30,verbose_name=' الاسم الاول  ',blank=False,null=False,default='',help_text=None)
@@ -35,7 +35,7 @@ class Account(AbstractBaseUser,PermissionsMixin):
 
 
     def __str__(self):
-        return self.first_name + " " + self.last_name
+        return self.username
 
 
 
@@ -50,9 +50,9 @@ class Account(AbstractBaseUser,PermissionsMixin):
 
     def set_password(self, raw_password):
         self.password = make_password(raw_password)
-        self.last_password_change_attemp = datetime.now()
+        self.last_password_change_attemp = datetime.datetime.now()
         self.save()
 
 
 
-    
+
