@@ -4,10 +4,10 @@ from django.contrib.auth.models import BaseUserManager
 class Manager(BaseUserManager):
 
     def create_user(self,username,email,password=None):
-        # if not email:
-        #     raise ValueError(' user must have email  ')
-        # if not username:
-        #     raise ValueError(' user must have username  ')
+        if not email:
+            raise ValueError(' user must have email  ')
+        if not username:
+            raise ValueError(' user must have username  ')
         
 
         user = self.model(

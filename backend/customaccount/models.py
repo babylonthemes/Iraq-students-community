@@ -35,7 +35,7 @@ class CustomAccount(AbstractBaseUser,PermissionsMixin):
 
 
     def __str__(self):
-        return self.username
+        return str(self.id)
 
 
 

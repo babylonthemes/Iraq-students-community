@@ -1,15 +1,30 @@
+from rest_framework import generics
 from django.contrib.auth import get_user_model
-from rest_framework import viewsets
-from rest_framework import permissions
 from .serializers import UserSerializer
+
+
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework.reverse import reverse
+
+
+@api_view(['GET'])
+def users_root(request, format=None):
+    return Response({   
+        'users list ':reverse("users",request=request,format=format),
+        'user details': reverse('user-details', request=request, format=format),
+    })
+
 
 User = get_user_model()
 
 
-class UsersViewSet(viewsets.ModelViewSet):
-    
-    queryset = User.objects.all().order_by('-date_joined')
+
+class UserList(generics.ListAPIView):
+    queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = [permissions.IsAdminUser]
-    
-    
+
+
+class UserDetail(generics.RetrieveAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
